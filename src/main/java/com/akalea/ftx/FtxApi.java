@@ -1,6 +1,8 @@
 package com.akalea.ftx;
 
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 import com.akalea.ftx.domain.FtxFill;
 import com.akalea.ftx.impl.FtxFillsImpl;
@@ -40,7 +42,7 @@ public class FtxApi {
   public Accounts accounts() {
     return accounts;
   }
-  
+
   public Fills fills() {
     return fills;
   }
@@ -96,6 +98,12 @@ public class FtxApi {
 
   public interface Fills {
     List<FtxFill> getFills(String market, FtxCredentials auth);
+
+    List<FtxFill> getFills(String market,
+                           Optional<LocalDateTime> startTime,
+                           Optional<LocalDateTime> endTime,
+                           FtxCredentials auth
+    );
   }
 
   public interface Orders {

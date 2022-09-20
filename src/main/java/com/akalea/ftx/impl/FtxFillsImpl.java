@@ -8,15 +8,33 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
+import java.util.StringJoiner;
 
 @Service
 public class FtxFillsImpl extends FtxApiBase implements FtxApi.Fills {
 
   @Override
   public List<FtxFill> getFills(String market, FtxCredentials auth) {
+    return getFills(market, Optional.empty(), Optional.empty(), auth);
+  }
 
-    String url = url(String.format("api/fills?market=%s", market));
+  @Override
+  public List<FtxFill> getFills(String market, Optional<LocalDateTime> startTime, Optional<LocalDateTime> endTime, FtxCredentials auth) {
+
+    final HashMap<String, String> params = new HashMap<>();
+
+    params.put("market", market);
+
+    startTime.ifPresent(localDateTime -> params.put("start_time", String.valueOf(localDateTime.getSecond())));
+    endTime.ifPresent(localDateTime -> params.put("end_time", String.valueOf(localDateTime.getSecond())));
+
+    String url = url(String.format("api/fills?%s", paramsToUrl(params)));
 
     ResponseEntity<FtxFillsImpl.FtxFillsResponse> resp = restTemplate.exchange(
         url,
@@ -28,7 +46,10 @@ public class FtxFillsImpl extends FtxApiBase implements FtxApi.Fills {
     return resp
         .getBody()
         .getResult();
+
+
   }
+
 
   private static class FtxFillsResponse extends FtxResponse<List<FtxFill>> {
 
