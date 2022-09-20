@@ -3,6 +3,7 @@ package com.akalea.ftx;
 import java.util.List;
 
 import com.akalea.ftx.domain.FtxFill;
+import com.akalea.ftx.impl.FtxFillsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,10 +21,15 @@ import com.akalea.ftx.impl.FtxOrdersImpl;
 public class FtxApi {
   @Autowired
   private Accounts accounts;
+
   @Autowired
   private FtxMarketsImpl markets;
+
   @Autowired
   private FtxOrdersImpl orders;
+
+  @Autowired
+  private FtxFillsImpl fills;
 
   public AuthenticatedFtxApi withAuth(FtxCredentials auth) {
     return new AuthenticatedFtxApi()
@@ -33,6 +39,10 @@ public class FtxApi {
 
   public Accounts accounts() {
     return accounts;
+  }
+  
+  public Fills fills() {
+    return fills;
   }
 
   public Markets markets() {
@@ -85,7 +95,6 @@ public class FtxApi {
   }
 
   public interface Fills {
-
     List<FtxFill> getFills(String market, FtxCredentials auth);
   }
 
