@@ -31,10 +31,12 @@ public class FtxFillsImpl extends FtxApiBase implements FtxApi.Fills {
 
     params.put("market", market);
 
-    startTime.ifPresent(localDateTime -> params.put("start_time", String.valueOf(localDateTime.getSecond())));
-    endTime.ifPresent(localDateTime -> params.put("end_time", String.valueOf(localDateTime.getSecond())));
+    startTime.ifPresent(localDateTime -> params.put("start_time", String.valueOf(getEpoch(localDateTime))));
+    endTime.ifPresent(localDateTime -> params.put("end_time", String.valueOf(getEpoch(localDateTime))));
 
     String url = url(String.format("api/fills?%s", paramsToUrl(params)));
+
+    System.out.println(String.format("URL: %s", url));
 
     ResponseEntity<FtxFillsImpl.FtxFillsResponse> resp = restTemplate.exchange(
         url,
@@ -47,9 +49,7 @@ public class FtxFillsImpl extends FtxApiBase implements FtxApi.Fills {
         .getBody()
         .getResult();
 
-
   }
-
 
   private static class FtxFillsResponse extends FtxResponse<List<FtxFill>> {
 

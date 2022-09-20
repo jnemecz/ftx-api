@@ -5,6 +5,7 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.security.NoSuchAlgorithmException;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
@@ -13,7 +14,6 @@ import java.util.Optional;
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 
-import com.google.common.collect.HashBiMap;
 import org.apache.commons.codec.binary.Hex;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
@@ -33,6 +33,8 @@ public class FtxApiBase {
   private static String ftxServerTimeUrl = "https://otc.ftx.com/api/time";
   private static String userAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 Safari/537.36";
 
+  private static ZoneId zoneId = ZoneId.systemDefault();
+
   @Autowired
   protected ObjectMapper om;
 
@@ -41,6 +43,10 @@ public class FtxApiBase {
 
   protected String url(String path) {
     return String.format("%s/%s", baseUrl, path);
+  }
+
+  protected long getEpoch(LocalDateTime time) {
+    return time.atZone(zoneId).toEpochSecond();
   }
 
   protected String paramsToUrl(HashMap<String, String> parameters) {
