@@ -52,6 +52,8 @@ public class FtxApiBase {
   protected String paramsToUrl(HashMap<String, String> parameters) {
 
     return parameters.entrySet().stream()
+
+
         .map(p -> urlEncodeUTF8(p.getKey()) + "=" + urlEncodeUTF8(p.getValue()))
         .reduce((p1, p2) -> p1 + "&" + p2)
         .orElse("");
@@ -59,6 +61,9 @@ public class FtxApiBase {
   }
 
   protected String urlEncodeUTF8(String s) {
+    if (s == null) {
+      return null;
+    }
     try {
       return URLEncoder.encode(s, "UTF-8");
     } catch (UnsupportedEncodingException e) {
