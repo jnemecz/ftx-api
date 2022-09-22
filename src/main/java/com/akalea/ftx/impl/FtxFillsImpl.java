@@ -29,7 +29,9 @@ public class FtxFillsImpl extends FtxApiBase implements FtxApi.Fills {
 
     final HashMap<String, String> params = new HashMap<>();
 
-    params.put("market", market);
+    if (market != null) {
+      params.put("market", market);
+    }
 
     startTime.ifPresent(localDateTime -> params.put("start_time", String.valueOf(getEpoch(localDateTime))));
     endTime.ifPresent(localDateTime -> params.put("end_time", String.valueOf(getEpoch(localDateTime))));
