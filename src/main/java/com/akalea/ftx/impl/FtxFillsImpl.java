@@ -38,8 +38,6 @@ public class FtxFillsImpl extends FtxApiBase implements FtxApi.Fills {
 
     String url = url(String.format("api/fills?%s", paramsToUrl(params)));
 
-    System.out.println(String.format("URL: %s", url));
-
     ResponseEntity<FtxFillsImpl.FtxFillsResponse> resp = restTemplate.exchange(
         url,
         HttpMethod.GET,
