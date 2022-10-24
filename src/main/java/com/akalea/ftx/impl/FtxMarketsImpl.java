@@ -14,40 +14,42 @@ import com.akalea.ftx.domain.FtxMarket;
 @Service
 public class FtxMarketsImpl extends FtxApiBase implements Markets {
 
-    public List<FtxMarket> getMarkets(FtxCredentials auth) {
-        String url = url("api/markets");
-        ResponseEntity<FtxMarketsResponse> resp =
-            restTemplate.exchange(
-                url,
-                HttpMethod.GET,
-                signedRequest(url, HttpMethod.GET, null, auth),
-                new ParameterizedTypeReference<FtxMarketsResponse>() {
-                });
-        return resp
-            .getBody()
-            .getResult();
-    }
+  public List<FtxMarket> getMarkets() {
+    String url = url("api/markets");
 
-    public FtxMarket getMarket(String market, FtxCredentials auth) {
-        String url = url(String.format("api/markets/%s", market));
-        ResponseEntity<FtxMarketResponse> resp =
-            restTemplate.exchange(
-                url,
-                HttpMethod.GET,
-                signedRequest(url, HttpMethod.GET, null, auth),
-                new ParameterizedTypeReference<FtxMarketResponse>() {
-                });
-        return resp
-            .getBody()
-            .getResult();
-    }
+    ResponseEntity<FtxMarketsResponse> resp = restTemplate
+        .exchange(
+            url,
+            HttpMethod.GET,
+            signedRequest(url, HttpMethod.GET, null),
+            new ParameterizedTypeReference<FtxMarketsResponse>() {
+            });
 
-    private static class FtxMarketsResponse extends FtxResponse<List<FtxMarket>> {
+    return resp
+        .getBody()
+        .getResult();
+  }
 
-    }
+  public FtxMarket getMarket(String market) {
+    String url = url(String.format("api/markets/%s", market));
+    ResponseEntity<FtxMarketResponse> resp =
+        restTemplate.exchange(
+            url,
+            HttpMethod.GET,
+            signedRequest(url, HttpMethod.GET, null),
+            new ParameterizedTypeReference<FtxMarketResponse>() {
+            });
+    return resp
+        .getBody()
+        .getResult();
+  }
 
-    private static class FtxMarketResponse extends FtxResponse<FtxMarket> {
+  private static class FtxMarketsResponse extends FtxResponse<List<FtxMarket>> {
 
-    }
+  }
+
+  private static class FtxMarketResponse extends FtxResponse<FtxMarket> {
+
+  }
 
 }

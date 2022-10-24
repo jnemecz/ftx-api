@@ -119,12 +119,6 @@ public class FtxApi {
   }
 
   public interface Markets {
-    List<FtxMarket> getMarkets(FtxCredentials auth);
-
-    FtxMarket getMarket(String market, FtxCredentials auth);
-  }
-
-  public interface MarketsAuth {
     List<FtxMarket> getMarkets();
 
     FtxMarket getMarket(String market);
@@ -180,21 +174,6 @@ public class FtxApi {
         @Override
         public List<FtxPosition> getPositions(String market) {
           return api.accounts.getPositions(market, auth);
-        }
-
-      };
-    }
-
-    public MarketsAuth markets() {
-      return new MarketsAuth() {
-
-        @Override
-        public List<FtxMarket> getMarkets() {
-          return api.markets.getMarkets(auth);
-        }
-
-        public FtxMarket getMarket(String market) {
-          return api.markets.getMarket(market, auth);
         }
 
       };

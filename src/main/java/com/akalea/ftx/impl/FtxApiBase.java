@@ -72,13 +72,18 @@ public class FtxApiBase {
   }
 
   @SuppressWarnings("unchecked")
+  protected <T> HttpEntity signedRequest(String url, HttpMethod method, Object body) {
+    return signedRequest(url, method, body, null);
+  }
+
+  @SuppressWarnings("unchecked")
   protected <T> HttpEntity signedRequest(String url, HttpMethod method, Object body, FtxCredentials auth) {
 
     String path = url.substring(baseUrl.length());
     long timestamp = System.currentTimeMillis();
     StringBuilder signaturePayload =
         new StringBuilder()
-            .append(String.valueOf(timestamp))
+            .append(timestamp)
             .append(method.name())
             .append(path);
 
@@ -96,17 +101,24 @@ public class FtxApiBase {
     if (bodyPayload != null) {
       signaturePayload.append(bodyPayload);
     }
-    String signature = guavaHmacSha256Base64(signaturePayload.toString(), auth.getApiSecret());
 
     MultiValueMap headers = new LinkedMultiValueMap();
     headers.put("Accept", Lists.newArrayList("application/json"));
     headers.put("Content-Type", Lists.newArrayList("application/json"));
     headers.put("user-agent", Lists.newArrayList(userAgent));
-    headers.put("FTX-KEY", Lists.newArrayList(auth.getApiKey()));
-    headers.put("FTX-SIGN", Lists.newArrayList(signature));
     headers.put("FTX-TS", Lists.newArrayList(String.valueOf(timestamp)));
-    if (auth.getSubaccount() != null)
-      headers.put("FTX-SUBACCOUNT", Lists.newArrayList(auth.getSubaccount()));
+
+    if (auth != null) {
+
+      String signature = guavaHmacSha256Base64(signaturePayload.toString(), auth.getApiSecret());
+
+      headers.put("FTX-KEY", Lists.newArrayList(auth.getApiKey()));
+      headers.put("FTX-SIGN", Lists.newArrayList(signature));
+
+      if (auth.getSubaccount() != null) {
+        headers.put("FTX-SUBACCOUNT", Lists.newArrayList(auth.getSubaccount()));
+      }
+    }
 
     return new HttpEntity(bodyPayload, headers);
   }
