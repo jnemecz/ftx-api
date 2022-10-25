@@ -34,12 +34,12 @@ public class FtxFuturesImpl extends FtxApiBase implements FtxApi.Futures {
   @Override
   public List<FtxFuture> getFutures() {
 
-    String url = "api/futures";
+    String url = url("api/futures");
 
     ResponseEntity<FtxFuturesImpl.FtxFuturesResponse> resp = restTemplate.exchange(
         url,
         HttpMethod.GET,
-        signedRequest(url, HttpMethod.GET, null, null),
+        signedRequest(url, HttpMethod.GET, null),
         FtxFuturesImpl.FtxFuturesResponse.class
     );
 
