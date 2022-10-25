@@ -10,6 +10,7 @@ import com.akalea.ftx.domain.FtxPosition;
 import com.akalea.ftx.domain.FtxSubAccount;
 import com.akalea.ftx.domain.FtxSubAccountBalance;
 import com.akalea.ftx.impl.FtxFillsImpl;
+import com.akalea.ftx.impl.FtxFuturesImpl;
 import com.akalea.ftx.impl.FtxMarketsImpl;
 import com.akalea.ftx.impl.FtxOrdersImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,9 @@ public class FtxApi {
   @Autowired
   private FtxFillsImpl fills;
 
+  @Autowired
+  private FtxFuturesImpl futures;
+
   public AuthenticatedFtxApi withAuth(FtxCredentials auth) {
     return new AuthenticatedFtxApi()
         .setApi(this)
@@ -49,6 +53,10 @@ public class FtxApi {
 
   public Markets markets() {
     return markets;
+  }
+
+  public Futures futures() {
+    return futures;
   }
 
   public Orders orders() {
