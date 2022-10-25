@@ -1,12 +1,11 @@
 package com.akalea.ftx.impl;
 
-import java.security.GeneralSecurityException;
-import java.security.cert.X509Certificate;
-
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
+import java.security.GeneralSecurityException;
+import java.security.cert.X509Certificate;
 
 public class CertUtils {
 

@@ -1,23 +1,23 @@
 package com.akalea.ftx;
 
-import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Optional;
-
-import com.akalea.ftx.domain.FtxFill;
-import com.akalea.ftx.impl.FtxFillsImpl;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.akalea.ftx.domain.FtxAccount;
 import com.akalea.ftx.domain.FtxCredentials;
+import com.akalea.ftx.domain.FtxFill;
+import com.akalea.ftx.domain.FtxFuture;
 import com.akalea.ftx.domain.FtxMarket;
 import com.akalea.ftx.domain.FtxOrder;
 import com.akalea.ftx.domain.FtxPosition;
 import com.akalea.ftx.domain.FtxSubAccount;
 import com.akalea.ftx.domain.FtxSubAccountBalance;
+import com.akalea.ftx.impl.FtxFillsImpl;
 import com.akalea.ftx.impl.FtxMarketsImpl;
 import com.akalea.ftx.impl.FtxOrdersImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class FtxApi {
@@ -122,6 +122,14 @@ public class FtxApi {
     List<FtxMarket> getMarkets();
 
     FtxMarket getMarket(String market);
+  }
+
+  public interface Futures {
+
+    List<FtxFuture> getFutures();
+
+    FtxFuture getFuture(String future);
+
   }
 
   public static class AuthenticatedFtxApi {

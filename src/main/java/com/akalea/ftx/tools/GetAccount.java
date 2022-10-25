@@ -1,17 +1,16 @@
 package com.akalea.ftx.tools;
 
-import java.util.Optional;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-
 import com.akalea.ftx.FtxApi;
 import com.akalea.ftx.configuration.FtxApiConfiguration;
 import com.akalea.ftx.domain.FtxAccount;
 import com.akalea.ftx.domain.FtxCredentials;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+import java.util.Optional;
 
 public class GetAccount {
 

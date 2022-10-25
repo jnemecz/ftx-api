@@ -1,8 +1,8 @@
 package com.akalea.ftx.domain;
 
-import java.util.List;
-
 import com.google.common.collect.Lists;
+
+import java.util.List;
 
 public class FtxAccount {
 

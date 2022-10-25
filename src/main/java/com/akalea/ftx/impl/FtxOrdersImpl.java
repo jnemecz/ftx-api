@@ -1,14 +1,13 @@
 package com.akalea.ftx.impl;
 
-import java.util.List;
-
+import com.akalea.ftx.FtxApi.Orders;
+import com.akalea.ftx.domain.FtxCredentials;
+import com.akalea.ftx.domain.FtxOrder;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.akalea.ftx.FtxApi.Orders;
-import com.akalea.ftx.domain.FtxCredentials;
-import com.akalea.ftx.domain.FtxOrder;
+import java.util.List;
 
 @Service
 public class FtxOrdersImpl extends FtxApiBase implements Orders {

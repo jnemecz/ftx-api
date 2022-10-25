@@ -1,15 +1,13 @@
 package com.akalea.ftx.impl;
 
-import java.util.List;
-
+import com.akalea.ftx.FtxApi.Markets;
+import com.akalea.ftx.domain.FtxMarket;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.akalea.ftx.FtxApi.Markets;
-import com.akalea.ftx.domain.FtxCredentials;
-import com.akalea.ftx.domain.FtxMarket;
+import java.util.List;
 
 @Service
 public class FtxMarketsImpl extends FtxApiBase implements Markets {

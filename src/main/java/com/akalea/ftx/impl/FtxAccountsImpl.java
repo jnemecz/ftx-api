@@ -1,21 +1,19 @@
 package com.akalea.ftx.impl;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
-
+import com.akalea.ftx.FtxApi.Accounts;
+import com.akalea.ftx.domain.FtxAccount;
+import com.akalea.ftx.domain.FtxCredentials;
+import com.akalea.ftx.domain.FtxPosition;
+import com.akalea.ftx.domain.FtxSubAccount;
+import com.akalea.ftx.domain.FtxSubAccountBalance;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.akalea.ftx.FtxApi.Accounts;
-import com.akalea.ftx.domain.FtxAccount;
-import com.akalea.ftx.domain.FtxCredentials;
-import com.akalea.ftx.domain.FtxOrder;
-import com.akalea.ftx.domain.FtxPosition;
-import com.akalea.ftx.domain.FtxSubAccount;
-import com.akalea.ftx.domain.FtxSubAccountBalance;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class FtxAccountsImpl extends FtxApiBase implements Accounts {
