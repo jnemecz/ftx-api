@@ -117,6 +117,9 @@ public class FtxApi {
   public interface Orders {
     FtxOrder placeOrder(FtxOrder order, FtxCredentials auth);
 
+
+    FtxOrder modifyOrder(FtxOrder order,FtxCredentials auth);
+
     List<FtxOrder> getOrders(String market, FtxCredentials auth);
   }
 
@@ -197,6 +200,8 @@ public class FtxApi {
 
     public OrdersAuth orders() {
       return new OrdersAuth() {
+
+
 
         @Override
         public FtxOrder placeOrder(FtxOrder order) {

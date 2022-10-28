@@ -12,37 +12,54 @@ import java.util.List;
 @Service
 public class FtxOrdersImpl extends FtxApiBase implements Orders {
 
-    public FtxOrder placeOrder(FtxOrder order, FtxCredentials auth) {
-        String url = url("api/orders");
+  public FtxOrder placeOrder(FtxOrder order, FtxCredentials auth) {
+    String url = url("api/orders");
 
-        ResponseEntity<FtxOrderResponse> resp = restTemplate.exchange(
-            url,
-            HttpMethod.POST,
-            signedRequest(url, HttpMethod.POST, order, auth),
-            FtxOrderResponse.class);
-        return resp
-            .getBody()
-            .getResult();
-    }
+    ResponseEntity<FtxOrderResponse> resp = restTemplate.exchange(
+        url,
+        HttpMethod.POST,
+        signedRequest(url, HttpMethod.POST, order, auth),
+        FtxOrderResponse.class);
+    return resp
+        .getBody()
+        .getResult();
+  }
 
-    public List<FtxOrder> getOrders(String market, FtxCredentials auth) {
-        String url = url(String.format("api/orders?market=%s", market));
+  @Override
+  public FtxOrder modifyOrder(FtxOrder order, FtxCredentials auth) {
 
-        ResponseEntity<FtxOrdersResponse> resp = restTemplate.exchange(
-            url,
-            HttpMethod.GET,
-            signedRequest(url, HttpMethod.GET, null, auth),
-            FtxOrdersResponse.class);
-        return resp
-            .getBody()
-            .getResult();
-    }
+    String url = url(String.format("api/orders/%s/modify", order.getId()));
 
-    private static class FtxOrderResponse extends FtxResponse<FtxOrder> {
+    ResponseEntity<FtxOrderResponse> resp = restTemplate.exchange(
+        url,
+        HttpMethod.POST,
+        signedRequest(url, HttpMethod.POST, order, auth),
+        FtxOrderResponse.class);
 
-    }
+    return resp
+        .getBody()
+        .getResult();
 
-    private static class FtxOrdersResponse extends FtxResponse<List<FtxOrder>> {
+  }
 
-    }
+  public List<FtxOrder> getOrders(String market, FtxCredentials auth) {
+    String url = url(String.format("api/orders?market=%s", market));
+
+    ResponseEntity<FtxOrdersResponse> resp = restTemplate.exchange(
+        url,
+        HttpMethod.GET,
+        signedRequest(url, HttpMethod.GET, null, auth),
+        FtxOrdersResponse.class);
+    return resp
+        .getBody()
+        .getResult();
+  }
+
+  private static class FtxOrderResponse extends FtxResponse<FtxOrder> {
+
+  }
+
+  private static class FtxOrdersResponse extends FtxResponse<List<FtxOrder>> {
+
+  }
 }
