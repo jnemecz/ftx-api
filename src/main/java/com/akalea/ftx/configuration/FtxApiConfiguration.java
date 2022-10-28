@@ -83,6 +83,11 @@ public class FtxApiConfiguration {
 
     }
 
+    SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
+    requestFactory.setOutputStreaming(false);
+
+    restTemplate.setRequestFactory(requestFactory);
+
     MappingJackson2HttpMessageConverter jacksonConverter =
         new MappingJackson2HttpMessageConverter(om);
 
