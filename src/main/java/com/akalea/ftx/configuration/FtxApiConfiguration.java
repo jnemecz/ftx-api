@@ -79,7 +79,7 @@ public class FtxApiConfiguration {
         rf.setConnectTimeout(connectTimeout);
       }
 
-      restTemplate.setRequestFactory(rf);
+      //restTemplate.setRequestFactory(rf);
 
     }
 
