@@ -3,6 +3,8 @@ package com.akalea.ftx.impl;
 import com.akalea.ftx.FtxApi.Orders;
 import com.akalea.ftx.domain.FtxCredentials;
 import com.akalea.ftx.domain.FtxOrder;
+import com.akalea.ftx.dto.CanceOrderRequest;
+import com.akalea.ftx.dto.CanceOrderResponse;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -23,6 +25,22 @@ public class FtxOrdersImpl extends FtxApiBase implements Orders {
     return resp
         .getBody()
         .getResult();
+  }
+
+  @Override
+  public CanceOrderResponse cancelOrder(CanceOrderRequest request, FtxCredentials auth) {
+
+    String url = url(String.format("api/orders/by_client_id/%s", request.getClientOrderId()));
+
+    ResponseEntity<CanceOrderResponse> resp = restTemplate.exchange(
+        url,
+        HttpMethod.DELETE,
+        signedRequest(url, HttpMethod.POST, request, auth),
+        CanceOrderResponse.class
+    );
+
+    return resp.getBody();
+
   }
 
   @Override
@@ -53,6 +71,10 @@ public class FtxOrdersImpl extends FtxApiBase implements Orders {
     return resp
         .getBody()
         .getResult();
+  }
+
+  private static class FtxOrderCancelResponse extends FtxResponse<FtxOrder> {
+
   }
 
   private static class FtxOrderResponse extends FtxResponse<FtxOrder> {

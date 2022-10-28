@@ -9,6 +9,8 @@ import com.akalea.ftx.domain.FtxOrder;
 import com.akalea.ftx.domain.FtxPosition;
 import com.akalea.ftx.domain.FtxSubAccount;
 import com.akalea.ftx.domain.FtxSubAccountBalance;
+import com.akalea.ftx.dto.CanceOrderRequest;
+import com.akalea.ftx.dto.CanceOrderResponse;
 import com.akalea.ftx.impl.FtxFillsImpl;
 import com.akalea.ftx.impl.FtxFuturesImpl;
 import com.akalea.ftx.impl.FtxMarketsImpl;
@@ -115,8 +117,10 @@ public class FtxApi {
   }
 
   public interface Orders {
+
     FtxOrder placeOrder(FtxOrder order, FtxCredentials auth);
 
+    CanceOrderResponse cancelOrder(CanceOrderRequest request, FtxCredentials auth);
 
     FtxOrder modifyOrder(FtxOrder order,FtxCredentials auth);
 
