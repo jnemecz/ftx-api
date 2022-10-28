@@ -120,12 +120,14 @@ public class FtxApiConfiguration {
 
     @Override
     public void handleError(ClientHttpResponse response) throws IOException {
-      throw new RuntimeException(
-          String.format(
-              "Error status code %d: %s",
-              response.getRawStatusCode(),
-              IOUtils.toString(response.getBody())));
+
+      throw new ApiException(response.getStatusCode(),
+          IOUtils.toString(response.getBody()),
+          response
+      );
+
     }
+
   }
 
   public static class LoggingInterceptor implements ClientHttpRequestInterceptor {
