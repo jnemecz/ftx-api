@@ -35,7 +35,7 @@ public class FtxOrdersImpl extends FtxApiBase implements Orders {
     ResponseEntity<CanceOrderResponse> resp = restTemplate.exchange(
         url,
         HttpMethod.DELETE,
-        signedRequest(url, HttpMethod.POST, null, auth),
+        signedRequest(url, HttpMethod.DELETE, request, auth),
         CanceOrderResponse.class
     );
 
