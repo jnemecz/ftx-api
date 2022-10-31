@@ -125,6 +125,9 @@ public class FtxApi {
     FtxOrder modifyOrder(FtxOrder order,FtxCredentials auth);
 
     List<FtxOrder> getOrders(String market, FtxCredentials auth);
+
+    FtxOrder getOrder(int clientId, FtxCredentials auth);
+
   }
 
   public interface OrdersAuth {

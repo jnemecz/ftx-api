@@ -22,6 +22,7 @@ public class FtxOrdersImpl extends FtxApiBase implements Orders {
         HttpMethod.POST,
         signedRequest(url, HttpMethod.POST, order, auth),
         FtxOrderResponse.class);
+
     return resp
         .getBody()
         .getResult();
@@ -60,6 +61,21 @@ public class FtxOrdersImpl extends FtxApiBase implements Orders {
 
   }
 
+  public FtxOrder getOrder(int clientId, FtxCredentials auth) {
+
+    String url = url(String.format("api/orders/by_client_id/%s", clientId));
+
+    ResponseEntity<FtxOrderResponse> resp = restTemplate.exchange(
+        url,
+        HttpMethod.GET,
+        signedRequest(url, HttpMethod.GET, null, auth),
+        FtxOrderResponse.class);
+
+    return resp
+        .getBody()
+        .getResult();
+
+  }
   public List<FtxOrder> getOrders(String market, FtxCredentials auth) {
     String url = url(String.format("api/orders?market=%s", market));
 
