@@ -8,12 +8,12 @@ public class FtxOrder {
 
     private Long            id;
     private Date   createdAt;
-    private Integer         filledSize;
+    private Double         filledSize;
     private String          future;
     private String          market;
     private Double          price;
     private Double          avgFillPrice;
-    private Integer         remainingSize;
+    private Double         remainingSize;
     private FtxPositionSide side;
     private Double          size;
     private String          status;
@@ -65,11 +65,11 @@ public class FtxOrder {
         return this;
     }
 
-    public Integer getFilledSize() {
+    public Double getFilledSize() {
         return filledSize;
     }
 
-    public FtxOrder setFilledSize(Integer filledSize) {
+    public FtxOrder setFilledSize(Double filledSize) {
         this.filledSize = filledSize;
         return this;
     }
@@ -110,11 +110,11 @@ public class FtxOrder {
         return this;
     }
 
-    public Integer getRemainingSize() {
+    public Double getRemainingSize() {
         return remainingSize;
     }
 
-    public FtxOrder setRemainingSize(Integer remainingSize) {
+    public FtxOrder setRemainingSize(Double remainingSize) {
         this.remainingSize = remainingSize;
         return this;
     }
