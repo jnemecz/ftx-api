@@ -28,9 +28,9 @@ public class FtxOrdersImpl extends FtxApiBase implements Orders {
   }
 
   @Override
-  public CanceOrderResponse cancelOrder(CanceOrderRequest request, FtxCredentials auth) {
+  public CanceOrderResponse cancelOrder(CanceOrderRequest request, int clientId, FtxCredentials auth) {
 
-    String url = url(String.format("api/orders/by_client_id/%s", request.getClientOrderId()));
+    String url = url(String.format("api/orders/by_client_id/%s", clientId));
 
     ResponseEntity<CanceOrderResponse> resp = restTemplate.exchange(
         url,

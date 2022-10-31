@@ -1,5 +1,7 @@
 package com.akalea.ftx.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * Created by jirka on 28.10.2022.
  *
@@ -7,16 +9,8 @@ package com.akalea.ftx.dto;
  */
 public class CanceOrderRequest {
 
-  private int clientOrderId;
+  @JsonProperty("market")
   private String market;
-
-  public int getClientOrderId() {
-    return clientOrderId;
-  }
-
-  public void setClientOrderId(int clientOrderId) {
-    this.clientOrderId = clientOrderId;
-  }
 
   public String getMarket() {
     return market;
@@ -25,4 +19,5 @@ public class CanceOrderRequest {
   public void setMarket(String market) {
     this.market = market;
   }
+
 }
