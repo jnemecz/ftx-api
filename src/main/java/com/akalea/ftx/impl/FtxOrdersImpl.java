@@ -89,10 +89,6 @@ public class FtxOrdersImpl extends FtxApiBase implements Orders {
         .getResult();
   }
 
-  private static class FtxOrderCancelResponse extends FtxResponse<FtxOrder> {
-
-  }
-
   private static class FtxOrderResponse extends FtxResponse<FtxOrder> {
 
   }
