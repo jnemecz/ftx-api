@@ -120,13 +120,13 @@ public class FtxApi {
 
     FtxOrder placeOrder(FtxOrder order, FtxCredentials auth);
 
-    CanceOrderResponse cancelOrder(CanceOrderRequest request, int clientId, FtxCredentials auth);
+    CanceOrderResponse cancelOrder(CanceOrderRequest request, String clientId, FtxCredentials auth);
 
     FtxOrder modifyOrder(FtxOrder order,FtxCredentials auth);
 
     List<FtxOrder> getOrders(String market, FtxCredentials auth);
 
-    FtxOrder getOrder(int clientId, FtxCredentials auth);
+    FtxOrder getOrder(String clientId, FtxCredentials auth);
 
   }
 
