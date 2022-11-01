@@ -29,7 +29,7 @@ public class FtxOrdersImpl extends FtxApiBase implements Orders {
   }
 
   @Override
-  public CanceOrderResponse cancelOrder(CanceOrderRequest request, int clientId, FtxCredentials auth) {
+  public CanceOrderResponse cancelOrder(CanceOrderRequest request, String clientId, FtxCredentials auth) {
 
     String url = url(String.format("api/orders/by_client_id/%s", clientId));
 
@@ -61,7 +61,7 @@ public class FtxOrdersImpl extends FtxApiBase implements Orders {
 
   }
 
-  public FtxOrder getOrder(int clientId, FtxCredentials auth) {
+  public FtxOrder getOrder(String clientId, FtxCredentials auth) {
 
     String url = url(String.format("api/orders/by_client_id/%s", clientId));
 
