@@ -24,7 +24,7 @@ public class FtxOrder {
     private boolean postOnly;
     private boolean retryUntilFilled;
 
-    private Integer clientId;
+    private String clientId;
 
     public static FtxOrder createNewOrder(
         String market,
@@ -182,11 +182,11 @@ public class FtxOrder {
         return this;
     }
 
-    public Integer getClientId() {
+    public String getClientId() {
         return clientId;
     }
 
-    public FtxOrder setClientId(Integer clientId) {
+    public FtxOrder setClientId(String clientId) {
         this.clientId = clientId;
         return this;
     }
