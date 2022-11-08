@@ -6,6 +6,7 @@ import com.google.common.collect.Lists;
 import com.google.common.hash.Hashing;
 import org.apache.commons.codec.binary.Hex;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.util.LinkedMultiValueMap;
@@ -34,6 +35,7 @@ public class FtxApiBase {
   private static ZoneId zoneId = ZoneId.systemDefault();
 
   @Autowired
+  @Qualifier("ftxObjectMapper")
   protected ObjectMapper om;
 
   @Autowired
