@@ -53,16 +53,6 @@ public class FtxApiConfiguration {
   }
 
   @Bean
-  public ObjectMapper objectMapper() {
-    ObjectMapper om =
-        Jackson2ObjectMapperBuilder
-            .json()
-            .build();
-    om.setSerializationInclusion(Include.NON_NULL);
-    return om;
-  }
-
-  @Bean
   public RestTemplate restTemplate(ObjectMapper om) {
 
     RestTemplate restTemplate = new RestTemplate();
