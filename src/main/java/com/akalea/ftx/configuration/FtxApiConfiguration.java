@@ -7,6 +7,7 @@ import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -44,6 +45,9 @@ public class FtxApiConfiguration {
   @Value("${app.rest.connectTimeout}")
   private Integer connectTimeout;
 
+  @Qualifier("ftxObjectMapper")
+  private ObjectMapper om;
+
   public FtxApiConfiguration() {
     CertUtils.acceptAllCertificates();
   }
@@ -53,7 +57,7 @@ public class FtxApiConfiguration {
   }
 
   @Bean
-  public RestTemplate restTemplate(ObjectMapper om) {
+  public RestTemplate restTemplate() {
 
     RestTemplate restTemplate = new RestTemplate();
 
